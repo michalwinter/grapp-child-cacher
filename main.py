@@ -37,6 +37,6 @@ def index():
 
     post(url=mother_url, json=trains)
   Thread(target=cache_train, kwargs={"trains_ids": body}).start()
-  return make_response(f"Getting routes of {len(body)} trains", 200)
+  return make_response(f"Getting routes of trains", 200)
   
 app.run(host='0.0.0.0', port=port)
