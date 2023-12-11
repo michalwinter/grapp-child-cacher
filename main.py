@@ -18,7 +18,6 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 
 def cache_logging(train_id, yet, total):
   os.system('cls')
-  print(f"Caching train {train_id} - {yet}/{total}", end='\r')
   
 
 @app.post("/")
@@ -30,7 +29,7 @@ def index():
     print(f"Getting routes of {len(train_ids)} trains")
 
     for train_id in train_ids:
-      cache_logging(train_id, len(trains) + 1, len(train_ids))
+      print(f"Caching train {train_id} - {len(trains) + 1}/{len(train_ids)}", end='\r')
       trains[train_id] = get_plain_train_route(train_id)
       #sleep(0.2 + (0.6 * random()))
 
