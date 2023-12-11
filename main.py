@@ -41,3 +41,4 @@ def index():
   return make_response(f"Getting routes of {len(train_ids)} trains", 200)
   
 app.run(host='0.0.0.0', port=port)
+app.app_context()
