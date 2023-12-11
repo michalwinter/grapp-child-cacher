@@ -33,7 +33,7 @@ def index():
       trains[train_id] = get_plain_train_route(train_id)
       #sleep(0.2 + (0.6 * random()))
 
-    post(url=mother_url, json=trains)
+    post(url=mother_url, json={"trains": trains})
   Thread(target=cache_train, kwargs={"trains_ids": body}).start()
   return make_response(f"Getting routes of trains", 200)
   
