@@ -28,7 +28,6 @@ def index():
     train_ids = kwargs.get("trains_ids", [])
     trains = {}
     print(f"Getting routes of {len(train_ids)} trains")
-    make_response(f"Getting routes of {len(train_ids)} trains", 200)
 
     for train_id in train_ids:
       cache_logging(train_id, len(trains) + 1, len(train_ids))
