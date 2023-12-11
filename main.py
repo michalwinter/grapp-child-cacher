@@ -6,6 +6,7 @@ from flask_cors import CORS
 from grapp import get_plain_train_route
 from options import get_options
 from requests import post
+from threading import Thread
 
 options = get_options(sys.argv[1:])
 
@@ -19,11 +20,10 @@ def cache_logging(train_id, yet, total):
   os.system('cls')
   print(f"Caching train {train_id} - {yet}/{total}", end='\r')
 
-@app.post("/")
-def index():
-  train_ids = request.get_json()
+def cache_train(**kwargs):
+  train_ids = kwargs.get("trains_ids", [])
   trains = {}
-
+  print(f"Getting routes of {len(train_ids)} trains")
   make_response(f"Getting routes of {len(train_ids)} trains", 200)
 
   for train_id in train_ids:
@@ -32,5 +32,12 @@ def index():
     #sleep(0.2 + (0.6 * random()))
 
   post(url=mother_url, json=trains)
+  
+
+@app.post("/")
+def index():
+  train_ids = request.get_json()
+  Thread(target=cache_train, kwargs={"trains_ids": train_ids}).start()
+  return make_response(f"Getting routes of {len(train_ids)} trains", 200)
   
 app.run(host='0.0.0.0', port=port)
