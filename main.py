@@ -32,6 +32,8 @@ def index():
       print(f"Caching train {train_id} - {len(trains) + 1}/{len(train_ids)}", end='\r')
       trains[train_id] = get_plain_train_route(train_id)
       #sleep(0.2 + (0.6 * random()))
+    
+    print(f"Cached train routes of {len(trains)} trains")
 
     post(url=mother_url, json={"trains": trains})
   Thread(target=cache_train, kwargs={"trains_ids": body}).start()
