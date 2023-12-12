@@ -39,6 +39,6 @@ def index():
 
 @app.get("/status")
 def status():
-  return 100
+  return 200
   
 app.run(host='0.0.0.0', port=port)
